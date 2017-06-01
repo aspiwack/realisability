@@ -1,0 +1,97 @@
+#+TITLE: Krivine realisability from scratch
+#+AUTHOR: Arnaud Spiwack
+
+
+* TODO Abstract
+
+* TODO Introduction
+
+* TODO Realisability in a few words
+
+* Simple types
+
+** Simply typed λ-calculus
+
+ Assume a set $I$ of individuals
+
+ $$
+ u,v ::= λx.u | u v | i ∈ I
+ a,b ::= ι | a → b
+ $$
+
+ Typing rules
+ $$
+ Γ,x:a ⊢ u : b
+ -------------
+ Γ ⊢ λx. u : a → b
+
+ Γ ⊢ u : a → b   Γ ⊢ v : a
+ -------------------------
+ Γ ⊢ u v : b
+
+ ----------
+ Γ ⊢ i : ι
+ $$
+
+** Operational semantics
+
+Given by a Krivine machine
+
+$$
+π ::= ∙ | u ⋅ π
+c ::= u ⋆ π
+$$
+
+$$
+u v ⋆ π ~> u ⋆ v ⋅ π
+λx. u ⋆ v ⋅ π ~> u[v] ⋆ π
+$$
+
+** Realisability model
+Let $T$ be the set of closed terms, $Π$ the set of (closed) stacks and
+$C$ the set of commands
+
+Fix a pole $⊥ ∈ 𝒫(C)$. The model is parametrised by this pole.
+
+Define acceptors as sets of stacks and realisers as sets of terms
+$$
+|a → b| ∈ 𝒫(Π)
+|a → b| ≜ ||a|| ⋅ |b|
+
+|ι| ∈ 𝒫(Π)
+|ι| ≜ I^⊥
+
+||a|| ∈ 𝒫(C)
+||a|| ≜ |a|^⊥
+$$
+
+*** TODO Define orthogonals
+
+** Adequation
+
+We will say that a sequent $x_1:a1,…,x_n:a_n ⊢ u : b$ is /adequat/ if
+
+$$
+∀ v_1∈||a_1||, …, v_n∈||a_n||. u[v_1,…,v_n] ∈ ||b||
+$$
+
+Our goal is to show that every derivable sequent is adequat. In
+particular, for closed terms, that:
+$$
+⊢ u : b ⟹ u ∈ ||b||
+$$
+
+This is not a composable property. It can be, however, strengthened to
+a property which we will be able to compose. Namely that all the
+typing rules are adequat.
+g
+gThis can be phrased as /all typing rule preserve adequacy of
+sequents/. In other words: if all premises are adequat then the
+conclusion is adequat.
+s
+We need to prove
+$$
+(∀ x_1∈||a_1||, …, x_n∈||a_n||, x∈||a||. u ∈ ||b||) ⟹ (∀ x_1∈||a_1||, …, x_n∈||a_n||. λx. u ∈ ||a → b||)
+(∀ x_1∈||a_1||, …, x_n∈||a_n||. u ∈ ||a → b||) ∧ (∀ x_1∈||a_1||, …, x_n∈||a_n||. v ∈ ||a||) ⟹ (∀ x_1∈||a_1||, …, x_n∈||a_n||. u v ∈ ||b||)
+∀ x_1∈||a_1||, …, x_n∈||a_n||. i∈||ι||
+$$
