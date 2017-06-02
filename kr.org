@@ -51,7 +51,8 @@ $$
 Let $T$ be the set of closed terms, $Π$ the set of (closed) stacks and
 $C$ the set of commands
 
-Fix a pole $⊥ ∈ 𝒫(C)$. The model is parametrised by this pole.
+Fix a pole $⊥ ∈ 𝒫(C)$, closed by anti-reduction. The model is
+parametrised by this pole.
 
 Define acceptors as sets of stacks and realisers as sets of terms
 $$
@@ -84,14 +85,59 @@ $$
 This is not a composable property. It can be, however, strengthened to
 a property which we will be able to compose. Namely that all the
 typing rules are adequat.
-g
-gThis can be phrased as /all typing rule preserve adequacy of
+
+This can be phrased as /all typing rule preserve adequacy of
 sequents/. In other words: if all premises are adequat then the
 conclusion is adequat.
-s
+
 We need to prove
 $$
-(∀ x_1∈||a_1||, …, x_n∈||a_n||, x∈||a||. u ∈ ||b||) ⟹ (∀ x_1∈||a_1||, …, x_n∈||a_n||. λx. u ∈ ||a → b||)
-(∀ x_1∈||a_1||, …, x_n∈||a_n||. u ∈ ||a → b||) ∧ (∀ x_1∈||a_1||, …, x_n∈||a_n||. v ∈ ||a||) ⟹ (∀ x_1∈||a_1||, …, x_n∈||a_n||. u v ∈ ||b||)
-∀ x_1∈||a_1||, …, x_n∈||a_n||. i∈||ι||
+(∀ v_1∈||a_1||, …, v_n∈||a_n||, v∈||a||. u[v,v_1,…,v_n] ∈ ||b||) ⟹ (∀ v_1∈||a_1||, …, v_n∈||a_n||. λx. u[v_1,…,v_n] ∈ ||a → b||)
+(∀ v_1∈||a_1||, …, v_n∈||a_n||. u[v_1,…,v_n] ∈ ||a → b||) ∧ (∀ v_1∈||a_1||, …, v_n∈||a_n||. v ∈ ||a||) ⟹ (∀ v_1∈||a_1||, …, v_n∈||a_n||. (u v)[v_1,…,v_n] ∈ ||b||)
+∀ v_1∈||a_1||, …, v_n∈||a_n||. i∈||ι||
 $$
+
+- Abstraction :: let $v_1∈||a_1||, …, v_n∈||a_n||$, we want to prove
+                 that $λx. u ∈ ||a → b|| = (||a|| ⋅ |b|)^⊥$. That is,
+                 that $∀ v_0 ∈ ||a||, π ∈ |b|, λx. u[v_1,…,v_n] ⋆ v_0 ⋅
+                 π ∈ ⊥$.
+
+                 By anti-reduction, it is sufficient to prove that
+                 $u[v_0,v_1,…,v_n] ⋆ π ∈ ⊥$, which holds by
+                 hypothesis.
+
+- Application :: again, let $v_1∈||a_1||, …, v_n∈||a_n||$, we want to
+                 prove that $(u v)[v_1,…,v_n] ∈ ||b|| = |b|^⊥$. That
+                 is, that $forall π∈|b|, (u v)[v_1,…,v_n] ⋆ π ∈ ⊥$.
+
+                 By anti-reduction, it is sufficient to prove that
+                 $u[v_1,…,v_n] ⋆ v[v_1,…,v_n] ⋅ π ∈ ⊥$. By hypothesis,
+                 $v[v_1,…,v_n] ∈ ||a||$, therefore $v[v_1,…,v_n] ⋅ π
+                 ∈ ||a|| ⋅ |b| = |a → b|$. By hypothesis $u[v_1,…,v_n]
+                 ∈ ||a → b||=|a → b|^⊥$, in particular, $u[v_1,…,v_n]
+                 ⋆ π ∈ ⊥$ (qed).
+
+- Individuals :: once more, let $v_1∈||a_1||, …, v_n∈||a_n||$, which
+                 we can, this time, promptly ignore. We want to prove
+                 that $i ∈ ||I|| = I^{⊥⊥}$. Which holds since, by
+                 definition, $i ∈ I ⊆ I^{⊥⊥}$.
+
+Remark: this latter property follows from the fact that $||I||$ is a
+double-orthogonal. Other types whose set of realiser is a
+double-orthogonal will enjoy similarly direct proofs for there
+introduction rule.
+
+** Proving properties
+
+* TODO Adding polymorphism: System F
+
+* TODO Adding non-termination
+
+* TODO Adding sum and products
+
+* Further reading
+
+- This is call-by-name
+- Sequent calculus & polarisation: http://assert-false.net/arnaud/papers/A%20dissection%20of%20L.pdf
+  - Also call-by-push-value [TODO]
+- Kriving realisability and sequent calculus: http://guillaume.munch.name/files/focalisation_and_classical_realisability_long.pdf
