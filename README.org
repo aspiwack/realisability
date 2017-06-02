@@ -1,0 +1,7 @@
+#+TITLE: Krivine realisability from scratch
+#+AUTHOR: Arnaud Spiwack
+
+* License
+
+The content of this repository is distributed under Creative Commons
+licence [[http://creativecommons.org/licenses/by/3.0/][CC BY 3.0]].
