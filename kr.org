@@ -129,13 +129,66 @@ introduction rule.
 
 ** Proving properties
 
+You may have noticed that we still have fixed the pole $⊥$. Adequacy
+is true /for all poles/. Changing the pole, on the other hand, gives
+rise to very different models.
+
+We are therefore free to play with the choice of pole to prove things
+about our type system.
+
+*** Type safety of individuals
+
+Let $⊥ = \{ u | ∃ i∈I. u⋆∙ ~>^* i⋆∙ \}$ the set of values which evaluate
+to an individual. Then, by definition $∙ ∈ |I| = I^⊥$.
+
+It follows that $⊢ u : ι ⟹ u∈||I||=|I|^⊥ ⟹ u⋆∙ ∈ ⊥$. In other words:
+every closed term of type $ι$ reduces to an individual.
+
+There is a lot to unfold here: in one swoop we've proved that (closed)
+terms of type $ι$ do not block (a property known as /progress/),
+reduce to a value of the desired form (type safety) and normalises.
+
+In more standard proofs, each require their indivual induction. And
+their own intermediate lemma. Normalisation is particularly
+unforgiving.
+
+In exchange, we have only proven these at a single type, and, more
+importantly, we have weakened the notion of type safety, with respect
+to the stronger /subject reduction/, which stipulates that every
+reduction step preserves typing, in comparison we have proved that
+reduction /eventually/ preserves realisers.
+
+Remark that we cannot prove that $⊢ u : a → b$ reduces to
+$λx. u'$. The proof above would work for any types whose set of
+realiser is a double-orthogonal. But ||a→b|| is not a double
+orthogonal. A way to see, why this cannot hold, is that our proof, so
+far, would be left unaffected if we added function constants (for
+instance, suppose $I=ℕ$ and extend the syntax with $⊢ + : ι→ι→ι$, and
+the obvious reduction rule). These constants certainly do not reduce
+to a $λ$-abstraction, so, indeed, it doesn't follow from $⊢ u : a→b$
+that $u$ must reduce to such a $λ$-abstraction.
+
+*** TODO Normalisation
+
 * TODO Adding polymorphism: System F
+
+System F is obtained by extending the syntax of types (and types alo)
 
 * TODO Adding non-termination
 
 * TODO Adding sum and products
 
-* Further reading
+* TODO Historical remarks
+
+- Realisability in Kleene's sense
+- The importance of orthogonality had been noticed by Girard. Was
+  already latent in his reducibility candidate proof of strong
+  normalisation of system F
+- Krivine's flavour or realisability (including the notion of pole)
+  was introduce to study classical logic and set theory under the gaze
+  of Curry-Howard.
+
+* TODO Further reading
 
 - This is call-by-name
 - Sequent calculus & polarisation: http://assert-false.net/arnaud/papers/A%20dissection%20of%20L.pdf
