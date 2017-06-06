@@ -124,7 +124,7 @@ $$
 
 Remark: this latter property follows from the fact that $||I||$ is a
 double-orthogonal. Other types whose set of realiser is a
-double-orthogonal will enjoy similarly direct proofs for there
+double-orthogonal will enjoy similarly direct proofs for their
 introduction rule.
 
 ** Proving properties
