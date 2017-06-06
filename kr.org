@@ -168,7 +168,33 @@ the obvious reduction rule). These constants certainly do not reduce
 to a $λ$-abstraction, so, indeed, it doesn't follow from $⊢ u : a→b$
 that $u$ must reduce to such a $λ$-abstraction.
 
-*** TODO Normalisation
+*** Normalisation
+
+I don't believe that there is a direct equivalent normalisation for
+functio types. Indeed, by definition $∙$ is not an acceptor of |a→b|,
+so it doesn't quite make sense, in our model, to ask what $u⋆∙$
+reduces to, when $u∈||a→b||$.
+
+An equaly interesting property of functions is totality. Usually
+defined along the following lines:
+- $u$ is total at type $ι$ if it reduces to an individual $i$
+- $u$ is total at type $a→b$ if for all term $v$ total at type $a$,
+  $u v$ is total at type $b$
+
+Obviously, it requires a bit massaging to fit in our model, where
+reduction is defined in terms of stacks and commands. I'm afraid I
+haven't completely defined the details out yet, but I believe that if
+you take the pole $⊥ = \{ c | c terminates \} (which is clearly closed
+by anti-reduction), then when $u⋆π ∈ ⊥$ then $u$ and all the elements
+of $π$ are total. This may even be taken as a definition of total: $u$
+is total at type $a$ if $u$ is a realiser of $a$ for this pole.
+
+Let us keep in mind, however, that in addition to the slightly unusual
+property, we are only concerned, in this realisability model with a
+form of weak head reduction for a deterministic reduction
+strategy. There are probably ways to extend the model to more complex
+reduction strategies, this has not been worked out in the literature
+yet, though.
 
 * TODO Adding polymorphism: System F
 
