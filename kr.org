@@ -194,3 +194,4 @@ System F is obtained by extending the syntax of types (and types alo)
 - Sequent calculus & polarisation: http://assert-false.net/arnaud/papers/A%20dissection%20of%20L.pdf
   - Also call-by-push-value [TODO]
 - Kriving realisability and sequent calculus: http://guillaume.munch.name/files/focalisation_and_classical_realisability_long.pdf
+- http://www.cs.yale.edu/homes/rieg-lionel/thesis/thesis-color.pdf
